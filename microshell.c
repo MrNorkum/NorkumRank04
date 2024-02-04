@@ -3,6 +3,7 @@
 int err(const char *s)
 {
 	while(*s && write(2, s++, 1));
+	return (1);
 }
 
 int	cd(char **argv, int i)
@@ -34,7 +35,7 @@ int	exec(char **argv, char **envp, int i)
 	}
 	waitpid(pid, &status, 0);
 	if (has_pipe && (dup2(fd[0], 0) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
-			return err("error: fatal\n");
+		return err("error: fatal\n");
 	return (WIFEXITED(status) && WEXITSTATUS(status));
 }
 
